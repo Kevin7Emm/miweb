@@ -1,10 +1,12 @@
 # HTML (Hipertext Markup Language)Extención:   .html
-Lenguaje estandar para crear paginas web hoy en día, describiendo su estructura o como sera el orden de la pagina, esto mediante etiquetas y ordenando estas a su vez mediante el identado(separación respecto a las etiqueta anterior de un *tab* o *"cuatro estpaios"*)
+Lenguaje estandar para crear paginas web hoy en día, describiendo su estructura o como sera el orden de la pagina, esto mediante etiquetas y ordenando estas a su vez mediante el identado(separación respecto a las etiqueta anterior de un *tab* o *"cuatro espacios"*)
 
     html>estructura
     css>diseño
     js>interactividad
 
+## Context root:
+(Raiz del proyexto web) una buena practica es meter todos nuestros archivos en diferentes carpertas, todos los q sean una subpagina de lo q será nuestro sitio se recomienda guardarlo en una subcarpeta llamada *web*; y asi con todos de manera q el unico archivo q no este contenido sea el principal el *index*
 
 ## Etiquetas:
 
@@ -45,12 +47,18 @@ Sirve para ver las diferentes opciones q hay dentro de cada etiqueta
 Horizontal rule> Crea una linea horizontal para dividir o crear secciones visuales 
 
 ---
+`../` 
+
+Esto quiere decir q vamos a subir(salir-devolvernos) en nuestra ubicación una carpeta o nivel
+
+---
 `<!---->`
 
 Para crear notas o comentarios que no veran los usuarios
 ```html
 <!--el comentario-->
 ```
+
 ---
 ---
 ---
@@ -79,6 +87,16 @@ Sera el nombre que aparecera en la pestaña de nuestra pagina, esta también ser
 </style>
 ```
 Al hacer estas etiqueteas en head se pude especificar el style especifico para los tipos de comandos q queremos q sea aplicado; asi no se tendra q estar repitiendo el codig. Este style sera especificado entre las { } y antes de esta iran las etiquetas a las q queremos q la modificación sea aplicada.
+
+`<link/>`
+
+Para señalar q cargaremos las carácteristicas o atributos desde otro archivo (El cual será un css)
+```html
+    <link rel="stylesheet" href="CSS/estilos.css"/> 
+```
+`rel=` señalará el tipo de atributos q dará ese `css`
+
+`href=` señalará la ubicación del archivo `css` desde donde traeremos los atributos
 
 ---
 ---
@@ -173,7 +191,12 @@ Genera un salto de linea
 ---
 `<a></a>`
 
-ancord o hipervinculo; 
+ancord o hipervinculo; de estos hay dos tipos generales:
+
+* Rutas Relativas: Solo necesita el nombre del archivo y su extención, ya q esta dirrección y en la q estamos escribiendo deben  compartir carpeta (ejm:/contenido.html)(Al poner el "/" al principio indicamos q será una *ruta relativa* pero a toda nuestra página web; es decir, q el simbolo hará buscar la subcarpeta desde el inicio o la parte externa de nuestro proyecto)
+* Rutas Absolutas: Especifica la Ip/puerto/nombreDelArchivo (ejm:http://localhost:5500/contenido.html) 
+
+Las *Rutas Absolutas* no se recomiendan si la página pertence a la misma aplicación ya q estas dirreciones pueden cambiar durante la realización del proyecto, y se dañaria el link por lo q en este caso se recomienda usar las *rutas relativas*; Pero si la pagina esta en otro sitio web es mejor usar las *rutas absolutas*.
 
 1. Cargará el link dentro de la misma pestaña en q estemos
 ```html
@@ -220,6 +243,13 @@ Para insertar imagenes a nuestra pagina:
 ```html
 <img src="Carpeta de ubicación/Nombreimagen.png" height="##" width="##" />
 ```
+* Para q un link `</a>` no tenga letras sino una imagen como enlace
+se sube la imagen en la parte donde se suele poner el texto a mostrar, en el centro:
+```html
+<a href="http://globalmentoring.com.mx" target="_blank">
+        <img src="http://globalmentoring.com.mx/imagenes/gm.png" alt="Logo globalmentoring" style="width: 150px;height: 74px;"/>
+    </a>
+````
 * El atributo texto alternativo o *alt=""* para q la imagen tenga contenida dentro de si algun texto como descripción; la diferencia de *title* es q el *alt* solo se mostrará si la imagen no carga.(Estos dos atributos sirven tanto para imagenes como para párrafos)
 
 ---
@@ -287,7 +317,7 @@ type= es para darle al button su función (si este nose especifica el q tendrá 
 
 `<button type="button" img src=Link o ubicación imagen>Tipo boton</button>`
 
-img=al agragar esto, el boton no tendra letras sino imagenes 
+img=al agragar esto, el boton no tendra letras sino imagenes.
 
 ---
 `<ul>`(Sección dentro de body para listas)`<ol>`
@@ -331,12 +361,17 @@ Es para poner los elementos q conforman la lista
     value= 	Indica el valor inicial que tendrá ese campo de datos; apartir del numero indicado allí 
     
     style= Este atributo nos permite modificar visualmente en elmentos HTML el color, la fuente, entre otros.Aquí es usado para cambiar el estilo de letras, numeración 
-    ```html
-    style="color:blue" Cambiará el color de la fuente
-    style="font-size:50px" Cambiará el tamaño de fuente
-    Style="font-family:'Courier New'" Cambiará el tipo de fuente
-    <body style="background-color: powderblue;"> Al dar este atributo en el inicio del *body* se cambiará el color de fondo de esa sección(Es decir; aqui seria de toda la página).
-    ```
+    
+    `style="color:blue"` Cambiará el color de la fuente, ya sea utilizando el nombre de color, codigo o valor rgb(red-green-blue); codigo hsl (es una rueda de colores de 0-360) aquí su primer número sera el nombre del color, el segundo será la saturación o escala de grises 0%=gris 100%=color correspondiente, el tercero será la iluminación 0%=negro 100%=blanco; y código hezadecimal (se compone de seis digitos cuando no esta simplificando entre números y letras)
+    
+    1. `style="border:10px solid rgba(220, 20, 60, .5)">` Con el canal Alfa se dará transparencia al (rgb`a`) o (hsl`a`) de igual forma es decir, su ultimo número será el q la definá donde: 1=(0%) .5=(50%) 0=(100%) de transparencia.
+
+    `style="font-size:50px"` Cambiará el tamaño de fuente
+
+    `Style="font-family:'Courier New'"` Cambiará el tipo de fuente
+
+    `<body style="background-color: powderblue;">` Al dar este atributo en el inicio del *body* se cambiará el color de fondo de esa sección(Es decir; aqui seria de toda la página); y si en lugar de poner `<body>` usamos `<p>` cada parrafo tendrá el resaltado o relleno del color especificado en este atributo.(De igual forma `background-color` servirá para mas etiquetas)
+
 ---
 `<table> </table>`
 
@@ -454,8 +489,8 @@ Es el pie de pagina de nuestro sitio; se usa para poner el copyright, la informa
 
 [ejm-blog.html](file:///C:/Users/Kevion%20Sneyder/Desktop/workspace/codigo%20proyecto%20html/blog.html)
 
-* Compartidos en slack
-
+* Herramientas
+C
 [codigos status html](https://files.slack.com/files-pri/T04QSS39G4F-F04UKH160PM/image.png)
 
 [codigos status html con gatos](https://http.cat/)
@@ -470,7 +505,9 @@ Es el pie de pagina de nuestro sitio; se usa para poner el copyright, la informa
 
 [Biblioteca de carácteres](https://html.spec.whatwg.org/multipage/named-characters.html)
 
-* Videos para introcucirme
+[Biblioteca de colores en rgb, hsl, hexadecimal](https://htmlcolorcodes.com/es/)
+
+* Videos de introducción
 
 [introducción a la programación](https://youtu.be/VxrIZGQfxmE)
 
