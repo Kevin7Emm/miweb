@@ -208,7 +208,7 @@ Las *Rutas Absolutas* no se recomiendan si la página pertence a la misma aplica
 <a target="blank" href="https://www.linkcualquiera.com">texto q direccionara al link</a>
 ```
 
-3. Para q el usuario con el link salte de un lugar a otro dentro de la misma pagina (esto se hace indicando un id especifico, y luego usando ese id en el codigo para llegar allí)(se usa generalmente en el *footer*)
+3. Para q el usuario con el link salte de un lugar a otro dentro de la misma pagina utilizando los Marcadores o Bookmarks(esto se hace indicando un id especifico, y luego usando ese id en el codigo para llegar allí)(se usa generalmente en el *footer*)
 ```html
 <a href="#nombre del id al q queremos llegar">descripción q verá el usuario para saber a donde sera dirigido este texto contendra el link</a>
 ```
@@ -230,7 +230,7 @@ Las *Rutas Absolutas* no se recomiendan si la página pertence a la misma aplica
 ---
 `<img src=/>`
 
-Para insertar imagenes a nuestra pagina: 
+Para insertar imagenes a nuestra pagina, usando src (ource): 
 1. Subir una imagen desde la web usando el link de esta:
 ```html
 <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"/>
@@ -253,6 +253,25 @@ se sube la imagen en la parte donde se suele poner el texto a mostrar, en el cen
 * El atributo texto alternativo o *alt=""* para q la imagen tenga contenida dentro de si algun texto como descripción; la diferencia de *title* es q el *alt* solo se mostrará si la imagen no carga.(Estos dos atributos sirven tanto para imagenes como para párrafos)
 
 ---
+`<iframe> </iframe>`
+
+Es un marco ajustable con css en el q podremos agragar información html, por lo q podremos cargar otras paginas html, otros sitios web directamente en el html, videos, imagenes, documentos, etc...
+
+1. Para mostrar una pagina html, q se encuentra dentro de la misma carpeta en la q estemos trabajando
+```html
+<iframe src="texto.html"></iframe>
+```
+2. Para mostrar una pagina q se encuentra en otro sitio web
+```html
+<iframe src="http://globalmentoring.com.mx"></iframe>
+```
+3. Para mostrar por defecto una página, pero con un boton para cambiar la dirrección de le q se muestra en el iframe
+```html
+<iframe src="texto.html" name="marco1"></iframe>
+    <a href="http://globalmentoring.com.mx" target="marco1">Cargar sitio</a>
+```
+
+---
 `<form> </form>`(Sección dentro de body)
 
 Es la sección dedicada a los formularios, donde el usuario pondra la información requerida
@@ -265,19 +284,19 @@ method= para indicar el metodo con el q se enviara la informacion; estos pueden 
 ```html
  <form action="/formulario" method="post">
         <label for="Nombre">Texto q se mostrará</label>
-        <input value="chanchito" type="text" id="Nombre" name="Nombre" placeholder="Chanchito feliz"/>
+        <input value="chanchito" type="text" id="Nombre" name="Nombre" placeholder="Chanchito feliz" required="true"/>
 ```
-
+novalidate=Si se agrega esta palabra al lado del form `<form novalidate>` hará q ese formulario sea enviado sin validar su contenido
 
 * `<label for="Nombre">Texto q se mostrará</label>` Label es q le muestra al usuario q información se le esta pidiendo en el input
 
     for= Le dará al label una acción; esta etiqueta funciona junto con `id`, siendo `for` la enviará el "click" al `id`
 
-* `<input value="chanchito" type="text" id="Nombre" name="Nombre" placeholder="Chanchito feliz"/>` Input es la casilla q será el campo en el q el usuario podrá escribir la información a la q se le hace referencia desde el label
+* `<input value="chanchito" type="text" id="Nombre" name="Nombre" placeholder="Chanchito feliz required="true""/>` Input es la casilla q será el campo en el q el usuario podrá escribir la información a la q se le hace referencia desde el label (Permite capturar información del usuario)
 
     ![input](iman/input.png)
     
-    value=Agrega en el input un texto por defecto, esto es usado para mostrarle al usuario un ejemplo de lo se espera q ponga allí.
+    value=Agrega en el input un texto por defecto, esto es usado para mostrarle al usuario un ejemplo de lo se espera q ponga allí; sin embargo, el usuario podrá enviar este texto en su formulario y el servidor lo tomará como un dato normal y no uno por defecto
 
     type=El input tiene mas de un "modo" por lo q type servira para elegir esto
 
@@ -289,12 +308,16 @@ method= para indicar el metodo con el q se enviara la informacion; estos pueden 
         ![radio](iman/radio.png)
     5. checkbox: lo mismo q radio pero con forma cuadrada (son casillas para q el usuario realice una selección)
     6. file: Convierte al input en un espacio para q el usuario suba archivos a la pagina
+    7. submit: Un tipo de boton par enviar los datos del formulario
 
     id= Es un atrivuto de identificación por lo q el mismo `id` no se debe repetir, cada `id` sera usado para una sola etiqueta (los atributos nos permiten interactuar con los elementos, pero por si solo no cumple sus caracteristicas completas) En sus funciones esta la opcion crear hipervinculos dentro de la misma pagina con `<a>`, tambíen se usa con **java** para dar style u otras funciones; pero también tiene la función de ser el q recibirá la acción del for en el label; esta etiqueta funciona junto con `for`, siendo `id` la q recibirá el "click" del `for`
     
-    name=Es para q el servidor sepa cual es la información recibida en cada input (esto no será visible para el usuario)
+    name=Es para q el servidor sepa cual es la información recibida en cada input ya q el id no cumplira esta función, sin embargo es recomendable q ambos tengan el mismo nombre (esto no será visible para el usuario)
 
     placeholder=Agrega en el input una "marca de agua", esto es usado para mostrarle al usuario lo se espera q ponga allí.
+
+    required=Este atributo al poner "true" impedirá q el formulario sea enviado si ese input no esta rellenado, pero si este es "false" o si simplemente se omite el formulario se enviará asi esos inputs esten vacios
+
 ```html
 <label for="Comentario">Comentario</label> 
         <textarea cols="50" rows="10" id="Comentario" name="Comentario" placeholder="ingrese comentario" >este es un valor por defecto</textarea>
@@ -314,6 +337,8 @@ type= es para darle al button su función (si este nose especifica el q tendrá 
 1. button=Se debe especificar el comportamiento q se quiere de este (esto se hace con java) 
 2. reset=Volvera a dejar el formulario con los valores q tenia por defecto
 3. submit=Enviara el formulario al servidor con el metodo q se especifico en el inicio de form> method 
+
+`formnovalidate="formnovalidate"` Al agregarle este atributo al submit, la información podrá ser enviada sin validarse por medio de este
 
 `<button type="button" img src=Link o ubicación imagen>Tipo boton</button>`
 
@@ -355,12 +380,22 @@ Ordered list; con este metodo para crear listas, cada elemento se enumerará aut
 ```
 ![orderedlist](iman/orderedlist.png)
 
+* `<dl></dl>`
+
+Description list; primero irá el termino, y luego su descripción (Es como un diccionario)
+
+1. `dt` description term; Este será el termino
+
+2. `dd` description data; Esta será la descripción del `dt`
+
 * `<li> </li>` List item
 Es para poner los elementos q conforman la lista
     
     value= 	Indica el valor inicial que tendrá ese campo de datos; apartir del numero indicado allí 
     
     style= Este atributo nos permite modificar visualmente en elmentos HTML el color, la fuente, entre otros.Aquí es usado para cambiar el estilo de letras, numeración 
+
+    `style="list-style-type:lower-roman` Cambiará el icono o guión del `<li>`, esto desde el tipo de lista al q pertenezcan los `<li>` a afectar `ol/ul`; también con este atributo se pueden quitar en caso q sea necesario (Como en los menus de las paginas) 
     
     `style="color:blue"` Cambiará el color de la fuente, ya sea utilizando el nombre de color, codigo o valor rgb(red-green-blue); codigo hsl (es una rueda de colores de 0-360) aquí su primer número sera el nombre del color, el segundo será la saturación o escala de grises 0%=gris 100%=color correspondiente, el tercero será la iluminación 0%=negro 100%=blanco; y código hezadecimal (se compone de seis digitos cuando no esta simplificando entre números y letras)
     
@@ -368,7 +403,7 @@ Es para poner los elementos q conforman la lista
 
     `style="font-size:50px"` Cambiará el tamaño de fuente
 
-    `Style="font-family:'Courier New'"` Cambiará el tipo de fuente
+    `Style="font-family:'Courier New'"` Cambiará el tipo de fuente; en caso q se quiera poner una fuente externa, se debe buscar en google y poner su link dentro del `<HEAD>`
 
     `<body style="background-color: powderblue;">` Al dar este atributo en el inicio del *body* se cambiará el color de fondo de esa sección(Es decir; aqui seria de toda la página); y si en lugar de poner `<body>` usamos `<p>` cada parrafo tendrá el resaltado o relleno del color especificado en este atributo.(De igual forma `background-color` servirá para mas etiquetas)
 
@@ -409,6 +444,10 @@ style="width: 500px;" Es para especificar el ancho en pixeles de una tabla
 ```
 ![table](iman/table.png)
 
+`*<caption>Listado de Personas</caption>`
+
+Para ponerle un titulo a la tabla, el cual se verá en la parte superior centrado
+
 * `<thead> </thead>`
 
 Para indicarle al navegador q ahí irá una cabecera (esto no será visible para el usuario para darle diferentes propiedades) 
@@ -420,15 +459,20 @@ Para indicarle al navegador q esa sección sera el cuerpo de la tabla (esto no s
 * `<tfoot> </tfoot>`
 
 Para indicarle al navegador q esa sección sera el pie de la tabla (esto no será visible para el usuario para darle diferentes propiedades)
-Genera filas
 
-  1. `<tr> </tr>` Table row (fila de la tabla)
+Genera filas:
 
-Genera columnas
+  1. `<tr> </tr>` Table row (filas de la tabla)
+
+Generan columnas:
 
   2. `<th> </th>` Crea una cabecerá dentro del tr
 
+    * `<th colspan="2">Nombre</th>` Para q un solo *th* ocupe (ente caso) 2 *td*
+
   3. `<td> </td>`Define elementos standar dentro de las celdas de la tabla(si no se define el contenido dentro de esta etiqueta, se generará la casilla vacia)
+    * `<td rowspan="2">jperez@mail.com</td>` Para un mismo *td* se ocupe para dos filas.(como el colspan pero con filas)
+
 ---
 ---
 ---
@@ -448,6 +492,8 @@ En **blog.html** la estructura interna cambiará a otras etiquetas para definir 
 `<div>`
 
 En anteriores versiones de **html** se usaba como *header*, *footer* o especialmente como *section* (este comando no cambia como se verá el contenido)
+
+Ahora se usa para agregar divisiones (o bloques) en nuestras páginas *html*
 ```html
 <div>
      <p>Soy un parrafo dentro de un div</p>
@@ -490,12 +536,14 @@ Es el pie de pagina de nuestro sitio; se usa para poner el copyright, la informa
 [ejm-blog.html](file:///C:/Users/Kevion%20Sneyder/Desktop/workspace/codigo%20proyecto%20html/blog.html)
 
 * Herramientas
-C
+
 [codigos status html](https://files.slack.com/files-pri/T04QSS39G4F-F04UKH160PM/image.png)
 
 [codigos status html con gatos](https://http.cat/)
 
 [pagina curso fullstack universidad](https://fullstackopen.com/es/)
+
+[página html y otros con ejemplos de cada etiqueta](https://developer.mozilla.org/en-US/)
 
 [biblioteca html y otros](https://lenguajehtml.com/html/)
 
